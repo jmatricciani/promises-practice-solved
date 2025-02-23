@@ -12,8 +12,8 @@
  */
 
 export function iterate(arg) {
-  // Your code goes here...
-  
+  console.log(arg);
+  return arg + 1;
 }
 
 /**
@@ -23,7 +23,7 @@ export function iterate(arg) {
  */
 
 export function alwaysThrows() {
-  // Your code goes here...
+  throw new Error("OH NOES");
 
 }
 
@@ -36,8 +36,11 @@ export function alwaysThrows() {
  * The function must be exported
  */
 
-export function onReject() {
-  // Your code goes here...
+export function onReject(err) {
+  if(err.message)
+    console.log(err.message);
+  else
+    console.log(err);
 
 }
 
@@ -62,10 +65,19 @@ export function onReject() {
  * !!! HINT: It is OK to have a lot of .then() code blocks.
  */
 
-// Your code goes here...
-export const promise;
-
-
+export const promise = Promise.resolve(1)
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => alwaysThrows())
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .then((data) => iterate(data))
+  .catch((err) => onReject(err));
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-9"
